@@ -50,9 +50,6 @@ function updateTSShapeLoadProgress() {}
 include(console);
 include(metrics);
 
-// Load default assets.
-include(defaultAssets);
-
 // Load up game code.
 include(game);
 
