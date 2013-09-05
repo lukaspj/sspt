@@ -42,3 +42,8 @@ datablock ParticleEmitterData(DefaultEmitter)
    softParticles = "1";
    softnessDistance = "1";
 };
+
+
+$pref::Video::missingTexturePath = expandFilename("./images/missingTexture.png");
+$pref::Video::unavailableTexturePath = expandFilename("./images/unavailable.png");
+$pref::Video::warningTexturePath = expandFilename("./images/warnMat.dds");

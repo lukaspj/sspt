@@ -1,9 +1,5 @@
 new ScriptObject(FlyCamera);
 
-//-----------------------------------------------------------------------------
-// Create a datablock for the observer camera.
-datablock CameraData(Observer) {};
-
 function FlyCamera::init(%this, %client, %group) {
    // Create a camera for the client.
    %c = new Camera() {
@@ -34,9 +30,6 @@ function FlyCamera::init(%this, %client, %group) {
 
    return %c;
 }
-
-function pitch(%amount) { $mvPitch += %amount * 0.01; }
-function yaw(%amount) { $mvYaw += %amount * 0.01; }
 
 function FlyCamera::controls(%this, %controls) {
    %this.map.call(%controls? "push" : "pop");

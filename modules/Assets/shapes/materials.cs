@@ -18,3 +18,13 @@ singleton Material(projectile_baseProjectile)
    doubleSided = "1";
    translucentBlendOp = "None";
 };
+
+singleton Material(soldier_ShapeBounds)
+{
+   mapTo = "ShapeBounds";
+   diffuseColor[0] = "0.105412 0.64 0 1";
+   specular[0] = "50 50 50 1";
+   specularPower[0] = "50";
+   doubleSided = "1";
+   translucentBlendOp = "None";
+};

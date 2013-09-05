@@ -36,9 +36,6 @@ $pref::Input::JoystickEnabled = 0;
 
 // Set directory paths for various data or default images.
 $pref::Video::ProfilePath = "sys/gfxprofiles";
-$pref::Video::missingTexturePath = "art/images/missingTexture.png";
-$pref::Video::unavailableTexturePath = "art/images/unavailable.png";
-$pref::Video::warningTexturePath = "art/images/warnMat.dds";
 
 $pref::Video::disableVerticalSync = 1;
 $pref::Video::mode = "800 600 false 32 60 4";
