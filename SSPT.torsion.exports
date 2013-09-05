@@ -19691,6 +19691,84 @@ This is useful to prevent fields in the #track's description from being overridd
 <base>SimSet</base>
 </class>
 <class>
+<name>SFXFMODEvent</name>
+<base>SFXTrack</base>
+<field>
+<name>fmodGroup</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+<field>
+<name>fmodName</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+<field>
+<name>fmodParameterRanges</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+<field>
+<name>fmodParameterValues</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+</class>
+<class>
+<name>SFXFMODEventGroup</name>
+<base>SimDataBlock</base>
+<method>
+<name>freeData</name>
+<args>()</args>
+<desc>Release the resource data for this group and its subgroups.
+
+@see SFXFMODProject_resources</desc>
+</method>
+<method>
+<name>isDataLoaded</name>
+<args>()</args>
+<desc>Test whether the resource data for this group has been loaded.
+
+@return True if the resource data for this group is currently loaded.</desc>
+</method>
+<method>
+<name>loadData</name>
+<args>( bool loadStreams=true, bool loadSamples=true )</args>
+<desc>Load the resource data for this group, if it has not already been loaded (either directly or indirectly through a parent group).
+This method works recursively and thus data for direct and indirect child groups to this group will be loaded as well.
+
+@param loadStreams Whether to open streams.
+@param loadSamples Whether to load sample banks.
+@return True if the data has been successfully loaded; false otherwise.
+
+@see SFXFMODProject_resources</desc>
+</method>
+<field>
+<name>fmodGroup</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+<field>
+<name>fmodName</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+<field>
+<name>fmodProject</name>
+<desc>DO NOT MODIFY!!</desc>
+</field>
+</class>
+<class>
+<name>SFXFMODEventSource</name>
+<base>SFXSource</base>
+</class>
+<class>
+<name>SFXFMODProject</name>
+<base>SimDataBlock</base>
+<field>
+<name>fileName</name>
+<desc>The compiled .fev file from FMOD Designer.</desc>
+</field>
+<field>
+<name>mediaPath</name>
+<desc>Path to the media files; if unset, defaults to project directory.</desc>
+</field>
+</class>
+<class>
 <name>SFXParameter</name>
 <base>SimObject</base>
 <method>
@@ -22188,12 +22266,6 @@ Each description is a newline-separated vector with the following elements:
 <args>()</args>
 <desc>Get the name of the class namespace assigned to this object.
 @return The name of the 'class' namespace.</desc>
-</method>
-<method>
-<name>getDebugInfo</name>
-<args>()</args>
-<desc>Return some behind-the-scenes information on the object.
-@return An ArrayObject filled with internal information about the object.</desc>
 </method>
 <method>
 <name>getDeclarationLine</name>
@@ -27601,23 +27673,6 @@ This function triggers a debug break and drops the process into the IDE's debugg
 @note This function is not available in shipping builds.@ingroup Debugging</desc>
 </function>
 <function>
-<name>debugDumpAllObjects</name>
-<args>()</args>
-<desc>@brief Dumps all current EngineObject instances to the console.
-
-@note This function is only available in debug builds.
-
-@ingroup Debugging</desc>
-</function>
-<function>
-<name>debugEnumInstances</name>
-<args>( string className, string functionName )</args>
-<desc>Call the given function for each instance of the given class.
-@param className Name of the class for which to enumerate instances.
-@param functionName Name of function to call and pass each instance of the given class.
-@note This function is only available in debug builds and primarily meant as an aid in debugging.@ingroup Console</desc>
-</function>
-<function>
 <name>debugv</name>
 <args>( string variableName )</args>
 <desc>@brief Logs the value of the given variable to the console.
@@ -27851,15 +27906,6 @@ When enabled a lot of network debugging information is sent to the console.
 @ingroup Networking</desc>
 </function>
 <function>
-<name>dumpAlloc</name>
-<args>( int allocNum )</args>
-<desc>@brief Dumps information about the given allocated memory block.
-
-@param allocNum Memory block to dump information about.@note Available in debug builds only. In torqueConfig.h, TORQUE_DISABLE_MEMORY_MANAGER must be undefined to use this function.
-
-@ingroup Debugging</desc>
-</function>
-<function>
 <name>dumpConsoleClasses</name>
 <args>( bool dumpScript=true, bool dumpEngine=true )</args>
 <desc>@brief Dumps all declared console classes to the console.
@@ -27897,39 +27943,12 @@ When enabled a lot of network debugging information is sent to the console.
 @ingroup Materials</desc>
 </function>
 <function>
-<name>dumpMemSnapshot</name>
-<args>( string fileName )</args>
-<desc>@brief Dumps a snapshot of current memory to a file.
-
-The total memory used will also be output to the console.
-This function will attempt to create the file if it does not already exist.
-@param fileName Name and path of file to save profiling stats to. Must use forward slashes (/)
-@tsexample
-dumpMemSnapshot( "C:/Torque/ProfilerLogs/profilerlog1.txt" );
-@endtsexample
-
-@note Available in debug builds only. In torqueConfig.h, TORQUE_DISABLE_MEMORY_MANAGER must be undefined to use this function.
-
-@ingroup Debugging</desc>
-</function>
-<function>
 <name>dumpNetStats</name>
 <args>()</args>
 <desc>@brief Dumps network statistics for each class to the console.
 
 The returned &lt;i&gt;avg&lt;/i&gt;, &lt;i&gt;min&lt;/i&gt; and &lt;i&gt;max&lt;/i&gt; values are in bits sent per update.  The &lt;i&gt;num&lt;/i&gt; value is the total number of events collected.
 @note This method only works when TORQUE_NET_STATS is defined in torqueConfig.h.
-@ingroup Networking</desc>
-</function>
-<function>
-<name>dumpNetStringTable</name>
-<args>()</args>
-<desc>@brief Dump the current contents of the networked string table to the console.
-
-The results are returned in three columns.  The first column is the network string ID.  The second column is the string itself.  The third column is the reference count to the network string.
-
-@note This function is available only in debug builds.
-
 @ingroup Networking</desc>
 </function>
 <function>
@@ -27942,39 +27961,6 @@ The results are returned in three columns.  The first column is the network stri
 <desc>Creates a 64x64 normal map texture filled with noise. The texture is saved to randNormTex.png in the location of the game executable.
 
 @ingroup GFX</desc>
-</function>
-<function>
-<name>dumpStringMemStats</name>
-<args>()</args>
-<desc>@brief Dumps information about String memory usage
-
-@ingroup Debugging
-@ingroup Strings</desc>
-</function>
-<function>
-<name>dumpTextureObjects</name>
-<args>()</args>
-<desc>Dumps a list of all active texture objects to the console.
-@note This function is only available in debug builds.
-@ingroup GFX</desc>
-</function>
-<function>
-<name>dumpUnflaggedAllocs</name>
-<args>( string fileName="" )</args>
-<desc>@brief Dumps all unflagged memory allocations.
-
-Dumps all memory allocations that were made after a call to flagCurrentAllocs(). Helpful when used with flagCurrentAllocs() for detecting memory leaks and analyzing general memory usage.
-
-@param fileName Optional file path and location to dump all memory allocations not flagged by flagCurrentAllocs(). If left blank, data will be dumped to the console.
-
-@tsexample
-dumpMemSnapshot(); // dumps info to console
-dumpMemSnapshot( "C:/Torque/profilerlog1.txt" ); // dumps info to file
-@endtsexample
-
-@note Available in debug builds only. In torqueConfig.h, TORQUE_DISABLE_MEMORY_MANAGER must be undefined to use this function.
-
-@ingroup Debugging</desc>
 </function>
 <function>
 <name>duplicateCachedFont</name>
@@ -28414,15 +28400,6 @@ getWord( text, 0 )
 @ingroup FieldManip</desc>
 </function>
 <function>
-<name>flagCurrentAllocs</name>
-<args>()</args>
-<desc>@brief Flags all current memory allocations.
-
-Flags all current memory allocations for exclusion in subsequent calls to dumpUnflaggedAllocs(). Helpful in detecting memory leaks and analyzing memory usage.
-
-@ingroup Debugging</desc>
-</function>
-<function>
 <name>flagCurrentGFXResources</name>
 <args>()</args>
 <desc>@brief Flags all currently allocated GFX resources.
@@ -28435,6 +28412,20 @@ Used for resource allocation and leak tracking by flagging current resources the
 <args>()</args>
 <desc>Releases all textures and resurrects the texture manager.
 @ingroup GFX</desc>
+</function>
+<function>
+<name>fmodDumpDSPInfo</name>
+<args>()</args>
+<desc>@brief Dump information about the standard DSP effects.
+
+@ingroup SFXFMOD</desc>
+</function>
+<function>
+<name>fmodDumpMemoryStats</name>
+<args>()</args>
+<desc>@return Prints the current memory consumption of the FMOD module
+
+@ingroup SFXFMOD</desc>
 </function>
 <function>
 <name>freeMemoryDump</name>
@@ -28771,10 +28762,6 @@ If no materials are found, an empty string is returned.
 <args>( float v1, float v2 )</args>
 <desc>Calculate the greater of two specified numbers.
 @param v1 Input value.@param v2 Input value.@returns The greater value of the two specified values.@ingroup Math</desc>
-</function>
-<function>
-<name>getMaxFrameAllocation</name>
-<desc>getMaxFrameAllocation();</desc>
 </function>
 <function>
 <name>getMethodPackage</name>
@@ -30318,15 +30305,6 @@ Requests a full refresh of events for all controllers. Useful when called at the
 @ingroup Input</desc>
 </function>
 <function>
-<name>resourceDump</name>
-<args>()</args>
-<desc>@brief List the currently managed resources
-
-Currently used by editors only, internal
-@ingroup Editors
-@internal</desc>
-</function>
-<function>
 <name>restartInstance</name>
 <desc>restartInstance()</desc>
 </function>
@@ -30385,12 +30363,6 @@ The controller will constantly at it's xRumble and yRumble intensities until cha
 @param object The object to serialize.
 @param filename The file name and path.
 @ingroup Console</desc>
-</function>
-<function>
-<name>sbmDumpStats</name>
-</function>
-<function>
-<name>sbmDumpStrings</name>
 </function>
 <function>
 <name>sceneDumpZoneStates</name>
@@ -31430,13 +31402,6 @@ trim( "   string  " ); // Returns "string".
 
 @param queueName String containing the name of queue
 @ingroup Messaging</desc>
-</function>
-<function>
-<name>validateMemory</name>
-<args>()</args>
-<desc>@brief Used to validate memory space for the game.
-
-@ingroup Debugging</desc>
 </function>
 <function>
 <name>VectorAdd</name>

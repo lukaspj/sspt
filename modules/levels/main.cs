@@ -32,3 +32,9 @@ function LevelModule::onEnd() {
    // Delete the objects we created.
    MissionGroup.delete();
 }
+
+//-----------------------------------------------------------------------------
+// A material to give the ground some colour (even if it's just white).
+singleton Material(BlankWhite) {
+   diffuseColor[0] = "1 1 1";
+};

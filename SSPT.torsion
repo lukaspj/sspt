@@ -8,7 +8,7 @@
 <Configs>
 <Config>
 <Name>Release</Name>
-<Executable>Full_DEBUG.exe</Executable>
+<Executable>Full.exe</Executable>
 <Arguments/>
 <HasExports>true</HasExports>
 <Precompile>true</Precompile>

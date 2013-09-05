@@ -17,24 +17,26 @@ function SideCamera::init(%this, %client, %group) {
    %c.scopeToClient(%client);
 
    // And let the client control the camera.
-   %client.setControlObject(%c);
+   %client.setCameraObject(%c);
 
    // If there's no input, capture some!
    if(!isObject(%this.map)) {
       %this.map = new ActionMap();
-      %this.map.bindCmd(mouse, button0, "$mvForwardAction = 1;", "$mvForwardAction = 0;");
-      %this.map.bindCmd(mouse, button1, "$mvBackwardAction = 1;", "$mvBackwardAction = 0;");
-      %this.map.bind(mouse, xaxis, yaw);
-      %this.map.bind(mouse, yaxis, pitch);
+      %this.map.bind( keyboard, w, moveforward );
+      %this.map.bind( keyboard, s, movebackward );
+      //%this.map.bind(mouse, xaxis, yaw);
+      //%this.map.bind(mouse, yaxis, pitch);
    }
+
+   %this.camera = %c;
 
    return %c;
 }
 
 function SideCamera::controls(%this, %controls) {
-   //%this.map.call(%controls? "push" : "pop");
+   %this.map.call(%controls? "push" : "pop");
 }
 
 function SideCamera::mountToPlayer(%this, %player) {
-   return %this.setOrbitObject(%player, "0 0 0.75", 10, 10, 10, true);
+   return %this.camera.setOrbitObject(%player, "0 0"SPC mDegToRad(270), 1, 8, 5, true);
 }

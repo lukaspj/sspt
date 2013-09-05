@@ -22,8 +22,9 @@ datablock PlayerData(PlayerBase) {
    maxDamage = 100;
    destroyedLevel = 100;
    debrisShapeName = "./shapes/playerDebris.dae";
-   debris = KnightDebris;
+   debris = PlayerDebris;
    maxForwardSpeed = 5;
    maxSideSpeed = 5;
    maxBackwardSpeed = 5;
+   firstPerson = false;
 };

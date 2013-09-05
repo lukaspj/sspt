@@ -13,7 +13,6 @@ include(navigation);*/
 
 // Scripts that make up this module.
 exec("./playGui.gui");
-exec("./level.cs");
 
 //-----------------------------------------------------------------------------
 // Called when all datablocks have been transmitted.
@@ -24,13 +23,16 @@ function GameConnection::onEnterGame(%client) {
       %c.setTransform("0 0 10 0 0 1 0");
       FlyCamera.controls(true);
       setFOV(50);
-      LocalClientConnection.camera = %c;
+      %client.camera = %c;
    } else {
       %c = SideCamera.init(%client, GameGroup, $MissionCleanupGroup, y);
       %c.setTransform(Level.sectionSize*.75 SPC 0 SPC Level.sectionHeight / 2 SPC
          "0.255082 0.205918 -0.944739 1.41418");
       SideCamera.controls(true);
       setFOV(50);
+      SideCamera.mountToPlayer(ThePlayer);
+      %client.camera = %c;
+      %client.setFirstPerson(false);
    }
 
    // Activate HUD which allows us to see the game. This should technically be
@@ -69,7 +71,6 @@ function onStart() {
    // Call onStart for child modules
    LevelModule.onStart();
    LocalClientConnection.setControlObject(ThePlayer);
-   LocalClientConnection.camera.mountToPlayer(ThePlayer);
    //Level.onStart();
 }
 
