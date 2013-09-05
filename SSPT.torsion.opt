@@ -1,0 +1,22 @@
+<TorsionProjectOptions>
+<Address>127.0.0.1</Address>
+<Password>password</Password>
+<Port>6060</Port>
+<LastConfig>Release</LastConfig>
+<Breakpoints/>
+<Bookmarks/>
+<OpenFiles>
+<File ScrollX="0" ScrollY="0">ts\tools.cs</File>
+<File ScrollX="0" ScrollY="0">modules\levels\main.cs</File>
+<File ScrollX="0" ScrollY="39">modules\game\main.cs</File>
+<File ScrollX="0" ScrollY="1" Active="true">main.cs</File>
+<File ScrollX="0" ScrollY="37">tools\worldEditor\scripts\editor.bind.ed.cs</File>
+<File ScrollX="0" ScrollY="23">ts\zoom.cs</File>
+<File ScrollX="0" ScrollY="0">ts\camera.cs</File>
+<File ScrollX="0" ScrollY="27">tools\particleEditor\particleEditor.ed.cs</File>
+<File ScrollX="0" ScrollY="39">tools\particleEditor\particleParticleEditor.ed.cs</File>
+<File ScrollX="0" ScrollY="0">ts\shim.cs</File>
+<File ScrollX="0" ScrollY="0">ts\std.cs</File>
+<File ScrollX="0" ScrollY="0">ts\gui.cs</File>
+</OpenFiles>
+</TorsionProjectOptions>
