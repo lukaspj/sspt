@@ -1,10 +1,6 @@
-new ScriptObject(FlyCamera);
+new ScriptObject(SideCamera);
 
-//-----------------------------------------------------------------------------
-// Create a datablock for the observer camera.
-datablock CameraData(Observer) {};
-
-function FlyCamera::init(%this, %client, %group) {
+function SideCamera::init(%this, %client, %group) {
    // Create a camera for the client.
    %c = new Camera() {
       datablock = Observer;
@@ -35,9 +31,10 @@ function FlyCamera::init(%this, %client, %group) {
    return %c;
 }
 
-function pitch(%amount) { $mvPitch += %amount * 0.01; }
-function yaw(%amount) { $mvYaw += %amount * 0.01; }
+function SideCamera::controls(%this, %controls) {
+   //%this.map.call(%controls? "push" : "pop");
+}
 
-function FlyCamera::controls(%this, %controls) {
-   %this.map.call(%controls? "push" : "pop");
+function SideCamera::mountToPlayer(%this, %player) {
+   return %this.setOrbitObject(%player, "0 0 0.75", 10, 10, 10, true);
 }

@@ -4,7 +4,8 @@
 
 // Module dependencies.
 include(levels);
-include(flyCamera);
+include(cameras);
+include(assets);
 /*
 include(stateMachine);
 include(bottomPrint);
@@ -18,19 +19,18 @@ exec("./level.cs");
 // Called when all datablocks have been transmitted.
 function GameConnection::onEnterGame(%client) {
    // Select camera.
-   if($flyCamera || true) {
+   if($flyCamera) {
       %c = FlyCamera.init(%client, GameGroup);
       %c.setTransform("0 0 10 0 0 1 0");
       FlyCamera.controls(true);
       setFOV(50);
       LocalClientConnection.camera = %c;
    } else {
-      /*
-      %c = TrackingCamera.init(%client, GameGroup, Knights, y);
+      %c = SideCamera.init(%client, GameGroup, $MissionCleanupGroup, y);
       %c.setTransform(Level.sectionSize*.75 SPC 0 SPC Level.sectionHeight / 2 SPC
          "0.255082 0.205918 -0.944739 1.41418");
-      TrackingCamera.controls(true);
-      setFOV(50);*/
+      SideCamera.controls(true);
+      setFOV(50);
    }
 
    // Activate HUD which allows us to see the game. This should technically be
@@ -68,6 +68,8 @@ function onStart() {
    
    // Call onStart for child modules
    LevelModule.onStart();
+   LocalClientConnection.setControlObject(ThePlayer);
+   LocalClientConnection.camera.mountToPlayer(ThePlayer);
    //Level.onStart();
 }
 

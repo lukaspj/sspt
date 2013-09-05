@@ -19,6 +19,9 @@ function LevelModule::onStart() {
          ambient = "0.1 0.1 0.1";
          castShadows = true;
       };
+      new Player(ThePlayer) {
+         dataBlock = PlayerBase;
+      };
    };
    $MissionGroup = MissionGroup;
 }
