@@ -16,7 +16,8 @@ function SideCamera::init(%this, %client, %group) {
    // quickly.
    %c.scopeToClient(%client);
 
-   // And let the client control the camera.
+   // Set the camera of the client to be this camera in such a manner that it
+   // doesn't remove control from the player.
    %client.setCameraObject(%c);
 
    // If there's no input, capture some!
