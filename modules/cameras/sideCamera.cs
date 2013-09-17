@@ -25,8 +25,7 @@ function SideCamera::init(%this, %client, %group) {
       %this.map = new ActionMap();
       %this.map.bind( keyboard, w, moveforward );
       %this.map.bind( keyboard, s, movebackward );
-      //%this.map.bind(mouse, xaxis, yaw);
-      //%this.map.bind(mouse, yaxis, pitch);
+      %this.map.bind( keyboard, space, jump );
    }
 
    %this.camera = %c;
